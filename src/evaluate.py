@@ -1,29 +1,35 @@
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import os
 import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import seaborn as sns # Thêm seaborn để vẽ ma trận đẹp hơn
 
-def evaluate(y_true, y_pred, target_names, show_cm = False,save_cm= False):
+def evaluate(y_true, y_pred, target_names, show_cm=True, save_cm=True):
     accuracy = accuracy_score(y_true, y_pred)
-    report = classification_report(y_true, y_pred, target_names= target_names)
+    report = classification_report(y_true, y_pred, target_names=target_names)
+    
+    cm = confusion_matrix(y_true, y_pred)
 
-    print("Accuracy: ", accuracy)
+    print(f"Accuracy: {accuracy:.4f}")
     print("\nClassification report:\n")
     print(report)
 
-    #Confusion matrix
-    if save_cm:
-        os.makedirs("outputs", exist_ok=True)
+    if save_cm or show_cm:
+        plt.figure(figsize=(12, 10))
 
-        plt.figure(figsize=(10, 8))
-        plt.imshow(cm)
+        sns.heatmap(cm, annot=False, fmt='d', cmap='Blues', 
+                    xticklabels=target_names, yticklabels=target_names)
+        
         plt.title("Confusion Matrix")
-        plt.xlabel("Predicted")
-        plt.ylabel("True")
-        plt.colorbar()
+        plt.xlabel("Predicted Label")
+        plt.ylabel("True Label")
+        plt.tight_layout()
 
-        plt.savefig("outputs/confusion_matrix.png")
-        print("Confusion matrix saved to outputs/confusion_matrix.png")
+        if save_cm:
+            os.makedirs("outputs", exist_ok=True)
+            plt.savefig("outputs/confusion_matrix.png")
+            print("\nConfusion matrix saved to outputs/confusion_matrix.png")
 
-    if show_cm:
-        plt.show()
+        if show_cm:
+            plt.show()
 
     plt.close()
