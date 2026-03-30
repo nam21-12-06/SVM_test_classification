@@ -1,0 +1,15 @@
+# Virtual Environment
+venv/
+
+# Python cache 
+__pycache__/
+*.py[cod]
+
+# Model
+models/*.pkl
+
+# Evaluation
+outputs/*.png
+
+# VS Code settings 
+.vscode/
