@@ -7,24 +7,35 @@ The project includes data preprocessing, model training, evaluation, a RESTful A
 
 ## 🚀 Features
 
-* 🔍 Text classification into 20 categories (e.g., sports, politics, technology, science)
-* ⚙️ TF-IDF feature extraction
-* 🤖 Machine Learning model (SVM) with hyperparameter tuning (GridSearchCV)
-* 📊 Model evaluation (accuracy, classification report, confusion matrix)
-* 🌐 REST API for real-time prediction
-* 🖥️ Interactive UI for user input and visualization
-* 🏆 Top-K predictions with confidence scores
+- 🔍 Text classification into 20 categories (e.g., sports, politics, technology, science)
+- ⚙️ TF-IDF feature extraction
+- 🤖 Machine Learning model (SVM) with hyperparameter tuning (GridSearchCV)
+- 📊 Model evaluation (accuracy, classification report, confusion matrix)
+- 🌐 REST API for real-time prediction
+- 🖥️ Interactive UI for user input and visualization
+- 🏆 Top-K predictions with confidence scores
 
 ---
 
 ## 🏗️ System Architecture
 
-```
-User Interface (Streamlit)
-        ↓
-    REST API (FastAPI)
-        ↓
- Machine Learning Model (SVM)
+```text
+ 👤 User Input (Text)
+       │
+       ▼
+ 🖥️ User Interface (Streamlit)
+       │ HTTP POST Request
+       ▼
+ 🌐 REST API (FastAPI)
+       │ Text Data
+       ▼
+ ⚙️ NLP Pipeline (Text Cleaning ➔ TF-IDF Vectorization)
+       │ N-gram Features
+       ▼
+ 🧠 Machine Learning Model (LinearSVC + CalibratedClassifierCV)
+       │
+       ▼
+ 📊 Top-K Predictions & Calibrated Confidence Scores (%)
 ```
 
 ---
@@ -63,26 +74,24 @@ project/
 
 ## 🧠 Model Details
 
-* **Algorithm**: Support Vector Machine (SVM)
-* **Feature Extraction**: TF-IDF
-* **Hyperparameter Tuning**: GridSearchCV
-* **Evaluation Metrics**:
-
-  * Accuracy
-  * Precision / Recall / F1-score
-  * Confusion Matrix
+- **Algorithm**: Support Vector Machine (LinearSVC)
+- **Feature Extraction**: TF-IDF (Term Frequency-Inverse Document Frequency) limited to top essential features with Bigrams.
+- **Hyperparameter Tuning**: GridSearchCV optimized for the C penalty parameter.
+- **Evaluation Metrics**:
+  - Accuracy
+  - Precision / Recall / F1-score
+  - Confusion Matrix
 
 ---
 
 ## 📊 Performance
 
-* **Accuracy**: ~84% on test set
-* Strong performance across diverse domains:
-
-  * Technology
-  * Sports
-  * Politics
-  * Science
+- **Accuracy**: ~84.33% on the test set.
+- Strong performance across diverse domains:
+  - Technology
+  - Sports
+  - Politics
+  - Science
 
 ---
 
@@ -152,48 +161,36 @@ Output:
 }
 ```
 
----
-
-## 📸 Demo
-
-> Add screenshots of:
->
-> * UI interface
-> * API response
-> * Confusion matrix
-
----
-
 ## 🛠️ Technologies Used
 
-* Python
-* scikit-learn
-* FastAPI
-* Streamlit
-* Matplotlib
+- Python
+- scikit-learn
+- FastAPI
+- Streamlit
+- Matplotlib
 
 ---
 
 ## 💡 Future Improvements
 
-* 🔧 Add deep learning models (BERT, LSTM)
-* 🌍 Deploy to cloud (AWS / Render / Docker)
-* 📈 Model comparison (Logistic Regression vs SVM)
-* 🧾 Logging and monitoring system
+- 🔧 Add deep learning models (BERT, LSTM)
+- 🌍 Deploy to cloud (AWS / Render / Docker)
+- 📈 Model comparison (Logistic Regression vs SVM)
+- 🧾 Logging and monitoring system
 
 ---
 
 ## 📌 Key Learning Outcomes
 
-* Built a complete machine learning pipeline
-* Designed and deployed a REST API for ML inference
-* Developed an interactive UI for real-time predictions
-* Learned how to structure production-ready ML projects
+- Built a complete machine learning pipeline
+- Designed and deployed a REST API for ML inference
+- Developed an interactive UI for real-time predictions
+- Learned how to structure production-ready ML projects
 
 ---
 
 ## 👨‍💻 Author
-Nam Nguyen Thai Hoai
----
+
+## Nam Nguyen Thai Hoai
 
 ## ⭐ If you find this project useful, give it a star!

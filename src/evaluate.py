@@ -25,12 +25,8 @@ def evaluate(y_true, y_pred, target_names, show_cm=True, save_cm=True):
         plt.tight_layout()
 
         if save_cm:
-            if not os.path.exists("outputs"):
-                os.makedirs("outputs")
-            elif os.path.isfile("outputs"): # Nếu trùng tên với một file
-                os.remove("outputs")        # Xóa file đó đi
-                os.makedirs("outputs")      # Tạo lại thư mục
-
+            os.makedirs("outputs", exist_ok=True)
+        
             plt.savefig("outputs/confusion_matrix.png")
             print("Confusion matrix is successfully stored in outputs/confusion_matrix.png")
 

@@ -9,7 +9,7 @@ app = FastAPI()
 
 # Load model 
 MODEL_PATH = "models/svm_model.pkl"
-model, vectorizer = load_model(MODEL_PATH)
+model, vectorizer, target_names = load_model(MODEL_PATH)
 
 # Load label names
 train_data, _ = load_data()

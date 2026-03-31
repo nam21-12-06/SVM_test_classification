@@ -1,20 +1,21 @@
+from src.preprocess import clean_text
 
-def predict_text(text, model, vectorizer, target_names, top_k = 3):
-    X = vectorizer.transform([text])
+def predict_text(text, model, vectorizer, target_names, top_k=3):
+    clean_input = clean_text(text)
+    X = vectorizer.transform([clean_input])
 
-    # Predict probabilities
     probs = model.predict_proba(X)[0]
 
-    # Get top-k indices
-    top_k_idx = probs.argsort()[-top_k:][::-1]
+    top_k = min(top_k, len(target_names))
+    top_indices = probs.argsort()[::-1][:top_k]
 
-    result = []
-    for idx in top_k_idx:
-        result.append({
-            "label": target_names[idx],
-            "confidence": round(float(probs[idx]), 6),
-            "confidence_percent": round(float(probs[idx]) * 100, 2)
+    formatted = []
+    for i in top_indices:
+        prob = probs[i] * 100
+        formatted.append({
+            "label": target_names[i],
+            "confidence": round(probs[i], 4),
+            "confidence_percent": round(prob, 2)
         })
 
-    return result
-
+    return formatted
